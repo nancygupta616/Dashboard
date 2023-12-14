@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const PORT = 3000;
+const PORT = 5000;
 
 const mysql = require("mysql2/promise");
 
@@ -13,54 +13,54 @@ const connection = mysql.createConnection({
   database: "revspire_db",
 });
 
-
 // dummy data
 
 app.use(cors);
 app.get("/display-dashboard", (req, res) => {
-    // const connection = await mysql.createConnection(dbConfig);
+  console.log("server is running on 5000");
+  // const connection = await mysql.createConnection(dbConfig);
 
-    // Check if the viewer user has an associated profile
-    // const [associatedProfiles] = await connection.query(
-    //   `"Name": ,
-    //    "Tags": ,
-    //    "Source": ,
-    //   "Created By": ,
-    // "Created Date": ,
-    // "Modified By": ,
-    // "Modified Date": ,
-    //  "Size"`,
-    //   [viewer_id]
-    // );
+  // Check if the viewer user has an associated profile
+  // const [associatedProfiles] = await connection.query(
+  //   `"Name": ,
+  //    "Tags": ,
+  //    "Source": ,
+  //   "Created By": ,
+  // "Created Date": ,
+  // "Modified By": ,
+  // "Modified Date": ,
+  //  "Size"`,
+  //   [viewer_id]
+  // );
 
-    const dummyData = [
-  {
-    "Name": "Content A",
-    "Tags": "Tag A, Tag B",
-    "Source": "Google Drive",
-    "Created By": "Nancy",
-    "Created Date": "1/1/2022",
-    "Modified By": "Teja",
-    "Modified Date": "2/1/2022",
-     "Size": "2 MB",
-  },
-  {
-    "Name": "Content A",
-    "Tags": "Tag A, Tag B",
-    "Source": "Google Drive",
-    "Created By": "Nancy",
-    "Created Date": "1/1/2022",
-    "Modified By": "Teja",
-    "Modified Date": "2/1/2022",
-    "Size": "2 MB",
-  },
-];
+  const dummyData = [
+    {
+      Name: "Content A",
+      Tags: "Tag A, Tag B",
+      Source: "Google Drive",
+      "Created By": "Nancy",
+      "Created Date": "1/1/2022",
+      "Modified By": "Teja",
+      "Modified Date": "2/1/2022",
+      Size: "2 MB",
+    },
+    {
+      Name: "Content A",
+      Tags: "Tag A, Tag B",
+      Source: "Google Drive",
+      "Created By": "Nancy",
+      "Created Date": "1/1/2022",
+      "Modified By": "Teja",
+      "Modified Date": "2/1/2022",
+      Size: "2 MB",
+    },
+  ];
 
-      return res.status(200).json(dummyData);
+  return res.status(200).json(dummyData);
+});
 
-     
-}
-)
+
+
 
 app.post("/view-content-and-folders-sorted", async (req, res) => {
   const viewer_id = req.body.viewer_id;
@@ -71,12 +71,10 @@ app.post("/view-content-and-folders-sorted", async (req, res) => {
   // Validate viewer_id field
   if (!viewer_id) {
     console.error("viewer_id field is missing in the request");
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "The viewer_id field is mandatory in the request body.",
-      });
+    return res.status(400).json({
+      success: false,
+      message: "The viewer_id field is mandatory in the request body.",
+    });
   }
 
   try {
@@ -94,12 +92,10 @@ app.post("/view-content-and-folders-sorted", async (req, res) => {
 
     if (!associatedProfiles.length) {
       console.error("No associated profile found for the viewer user");
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "The viewer user does not have an associated profile.",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "The viewer user does not have an associated profile.",
+      });
     }
 
     const viewerProfileId = associatedProfiles[0].profile;
@@ -115,12 +111,10 @@ app.post("/view-content-and-folders-sorted", async (req, res) => {
 
     if (!permissions.length || permissions[0].content_view_all !== 1) {
       console.error("Viewer lacks permission to view content");
-      return res
-        .status(403)
-        .json({
-          success: false,
-          message: "Permission denied: Cannot view content.",
-        });
+      return res.status(403).json({
+        success: false,
+        message: "Permission denied: Cannot view content.",
+      });
     }
 
     // Handle root folder ID retrieval
