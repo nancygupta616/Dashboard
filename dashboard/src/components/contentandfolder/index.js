@@ -8,36 +8,36 @@ const ContentAndFolders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(
-        //   "http://localhost:3000/display-dashboard"
-        // );
-         
-        // setData(response.data); 
-        // console.log(response);
-        // console.log(response.data);
+        const response = await axios.get(
+          "http://localhost:5000/display-dashboard"
+        );
+
+        setData(response.data);
+        console.log(response);
+        console.log(response.data);
         // Assuming the response is an array
-        data = [
-          {
-            "Name": "Content A",
-            "Tags": "Tag A, Tag B",
-            "Source": "Google Drive",
-            "Created By": "Nancy",
-            "Created Date": "1/1/2022",
-            "Modified By": "Teja",
-            "Modified Date": "2/1/2022",
-            "Size": "2 MB",
-          },
-          {
-            "Name": "Content A",
-            "Tags": "Tag A, Tag B",
-            "Source": "Google Drive",
-            "Created By": "Nancy",
-            "Created Date": "1/1/2022",
-            "Modified By": "Teja",
-            "Modified Date": "2/1/2022",
-            "Size": "2 MB",
-          },
-        ];
+        // data = [
+        //   {
+        //     "Name": "Content A",
+        //     "Tags": "Tag A, Tag B",
+        //     "Source": "Google Drive",
+        //     "Created By": "Nancy",
+        //     "Created Date": "1/1/2022",
+        //     "Modified By": "Teja",
+        //     "Modified Date": "2/1/2022",
+        //     "Size": "2 MB",
+        //   },
+        //   {
+        //     "Name": "Content A",
+        //     "Tags": "Tag A, Tag B",
+        //     "Source": "Google Drive",
+        //     "Created By": "Nancy",
+        //     "Created Date": "1/1/2022",
+        //     "Modified By": "Teja",
+        //     "Modified Date": "2/1/2022",
+        //     Size: "2 MB",
+        //   },
+        // ];
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
