@@ -8,43 +8,16 @@ const ContentAndFolders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/display-dashboard"
-        );
-
-        setData(response.data);
-        console.log(response);
+        const response = await axios.get("http://localhost:3001/api/data");
+        setData(response.data.data);
         console.log(response.data);
-        // Assuming the response is an array
-        // data = [
-        //   {
-        //     "Name": "Content A",
-        //     "Tags": "Tag A, Tag B",
-        //     "Source": "Google Drive",
-        //     "Created By": "Nancy",
-        //     "Created Date": "1/1/2022",
-        //     "Modified By": "Teja",
-        //     "Modified Date": "2/1/2022",
-        //     "Size": "2 MB",
-        //   },
-        //   {
-        //     "Name": "Content A",
-        //     "Tags": "Tag A, Tag B",
-        //     "Source": "Google Drive",
-        //     "Created By": "Nancy",
-        //     "Created Date": "1/1/2022",
-        //     "Modified By": "Teja",
-        //     "Modified Date": "2/1/2022",
-        //     Size: "2 MB",
-        //   },
-        // ];
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
     };
 
     fetchData();
-  }, []); // Run only once when the component mounts
+  }, []);
 
   // Render your component with the fetched data
   return (
@@ -53,25 +26,34 @@ const ContentAndFolders = () => {
         <Navbar />
         <div className="container-fluid">
           <div className="col-md-3">
-            <button className="btn btn-circle btn-secondary" type="button">
+            <button className="circle" type="button">
               Add
             </button>
-            <div>Root Marketing 2023 Gated Content</div>
+            <div class="single-row">
+              <div>Root</div>
+              <div>Marketing</div>
+              <div>2023</div>
+              <div>Gated</div>
+              <div>Content</div>
+            </div>
             <div className="btn-group dropdown-home">
               <button
-                className="btn btn-secondary btn-sm dropdown-toggle"
+                className="round-button btn-sm dropdown-toggle"
                 type="button"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Small button
+                Sort
               </button>
               <button
-                className="btn btn-secondary btn-sm dropdown-home"
+                className="round-button btn-sm dropdown-toggle"
                 type="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
               >
-                Small split button
+                Filter
               </button>
             </div>
           </div>
@@ -80,27 +62,27 @@ const ContentAndFolders = () => {
         <table className="table table-border">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
-              <th>Tags</th>
               <th>Source</th>
+              <th>Folder</th>
+              <th>Created At</th>
+              <th>Updated At</th>
               <th>Created By</th>
-              <th>Created Date</th>
-              <th>Modified By</th>
-              <th>Modified Date</th>
-              <th>Size</th>
+              <th>Updated By</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item) => (
-              <tr key={item.Name}>
-                <td>{item.Name}</td>
-                <td>{item.Tags}</td>
-                <td>{item.Source}</td>
-                <td>{item["Created By"]}</td>
-                <td>{item["Created Date"]}</td>
-                <td>{item["Modified By"]}</td>
-                <td>{item["Modified Date"]}</td>
-                <td>{item.Size}</td>
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.source}</td>
+                <td>{item.folder}</td>
+                <td>{item.created_at}</td>
+                <td>{item.updated_at}</td>
+                <td>{item.created_by}</td>
+                <td>{item.updated_by}</td>
               </tr>
             ))}
           </tbody>
