@@ -19,7 +19,6 @@ const ContentAndFolders = () => {
     fetchData();
   }, []);
 
-  // Render your component with the fetched data
   return (
     <div>
       <div className="px-3">
@@ -29,7 +28,7 @@ const ContentAndFolders = () => {
             <button className="circle" type="button">
               Add
             </button>
-            <div class="single-row">
+            <div className="single-row">
               <div>Root</div>
               <div>Marketing</div>
               <div>2023</div>

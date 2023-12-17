@@ -16,11 +16,11 @@
 
 .single-row > div::after {
   content: " > ";
-  margin: 0 5px; /* Adjust the margin as needed */
+  margin: 0 5px; 
 }
 
 .single-row > div:last-child::after {
-  content: ""; /* Remove the > after the last div */
+  content: "";
   margin: 0;
 }
 
